@@ -1,0 +1,54 @@
+%pip install -q transformers
+
+
+from transformers import AutoTokenizer
+bert_tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
+gpt_tokenizer = AutoTokenizer.from_pretrained("openai-community/gpt2")
+
+print("BERT and GPT tokenizers loaded successfully!")
+
+text = "Tokenization is an important step in Natural Language Processing!"
+
+print("\nOriginal Text:")
+print(text)
+
+
+bert_tokens = bert_tokenizer.tokenize(text)
+bert_ids = bert_tokenizer.encode(text, add_special_tokens=False)
+
+print("\n----- BERT TOKENIZER -----")
+print("Tokens:", bert_tokens)
+print("Token IDs:", bert_ids)
+print("Number of tokens:", len(bert_tokens))
+
+# Step 6: GPT tokenization
+gpt_tokens = gpt_tokenizer.tokenize(text)
+gpt_ids = gpt_tokenizer.encode(text, add_special_tokens=False)
+
+print("\n----- GPT-2 TOKENIZER -----")
+print("Tokens:", gpt_tokens)
+print("Token IDs:", gpt_ids)
+print("Number of tokens:", len(gpt_tokens))
+
+# Step 7: Compare outputs
+print("\n----- COMPARISON -----")
+print(f"{'Feature':<25}{'BERT':<25}{'GPT-2':<25}")
+print("-" * 75)
+print(f"{'Algorithm':<25}{'WordPiece':<25}{'Byte-level BPE':<25}")
+print(f"{'Vocabulary size':<25}{bert_tokenizer.vocab_size:<25}{gpt_tokenizer.vocab_size:<25}")
+print(f"{'Token count':<25}{len(bert_tokens):<25}{len(gpt_tokens):<25}")
+
+# Step 8: Display tokens side by side
+print("\n----- TOKEN-BY-TOKEN OUTPUT -----")
+for i in range(max(len(bert_tokens), len(gpt_tokens))):
+    bert_word = bert_tokens[i] if i < len(bert_tokens) else "-"
+    gpt_word = gpt_tokens[i] if i < len(gpt_tokens) else "-"
+    print(f"{i + 1:<5}{bert_word:<30}{gpt_word}")
+
+# Step 9: Decode token IDs
+print("\n----- DECODED TEXT -----")
+print("BERT:", bert_tokenizer.decode(bert_ids))
+print("GPT-2:", gpt_tokenizer.decode(gpt_ids))
+
+# Step 10: Result
+print("\nExperiment completed successfully!")

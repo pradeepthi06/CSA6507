@@ -1,0 +1,43 @@
+%pip install -q numpy pandas transformers torch
+
+print("All required AI libraries installed successfully!")
+
+
+import sys
+import numpy as np
+import pandas as pd
+import torch
+import transformers
+
+print("Python version:", sys.version.split()[0])
+print("NumPy version:", np.__version__)
+print("Pandas version:", pd.__version__)
+print("PyTorch version:", torch.__version__)
+print("Transformers version:", transformers.__version__)
+
+device = "GPU (CUDA)" if torch.cuda.is_available() else "CPU"
+print("Computing device:", device)
+
+print("\nAll libraries imported successfully!")
+
+
+# NumPy test
+arr = np.array([10, 20, 30, 40])
+print("NumPy array:", arr)
+print("Array sum:", np.sum(arr))
+
+# Pandas test
+data = {"Name": ["Alice", "Bob", "Charlie"],
+        "Marks": [85, 90, 95]}
+df = pd.DataFrame(data)
+print("\nPandas DataFrame:")
+print(df)
+
+# PyTorch test
+tensor = torch.tensor([1, 2, 3, 4])
+print("\nPyTorch tensor:", tensor)
+print("Tensor sum:", tensor.sum().item())
+
+# Transformers test
+from transformers import pipeline
+print("\nTransformers library is ready!")
